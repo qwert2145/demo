@@ -20,4 +20,9 @@ public class AccountsService{
         Accounts accounts = accountsDao.getAccount(id);
         return accounts;
     }
+
+    public void deleteCache() {
+        accountsDao.removeCache();
+    }
+
 }
