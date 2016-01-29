@@ -27,8 +27,7 @@
 	<!--<mvc:resources location="/" mapping="/**/*.png"/>-->
 	<!--<mvc:resources location="/" mapping="/**/*.gif"/>-->
 	<!--<mvc:resources location="/" mapping="/**/*.jpg"/>-->
-	<!-- 静态文件处理-->
-	<mvc:default-servlet-handler />
+
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.womai.bi.controller"	/>
 

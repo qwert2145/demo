@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:noNamespaceSchemaLocation="../bin/ehcache.xsd">  
+    <defaultCache eternal="false" maxElementsInMemory="1000" timeToIdleSeconds="3600"
+        timeToLiveSeconds="3600" maxEntriesLocalHeap="1000" maxEntriesLocalDisk="10000000"
+        memoryStoreEvictionPolicy="LRU" statistics="true" />
+
+    <cache name="accountCache" eternal="false" maxElementsInMemory="1000" timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600" maxEntriesLocalHeap="1000" maxEntriesLocalDisk="10000000"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+</ehcache>
