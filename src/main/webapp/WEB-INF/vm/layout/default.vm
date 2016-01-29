@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    #parse("/WEB-INF/vm/common/head.vm")
+<body>
+<div class="">
+    $screen_content
+    #parse("/WEB-INF/vm/common/footer.vm")
+</div>
+</body>
+</html>

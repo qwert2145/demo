@@ -1,0 +1,60 @@
+#set($layout = "/WEB-INF/vm/layout/default.vm")
+<p>
+    <a href="/textTemplate/index.do?pageNum=1">
+        文字模板
+    </a>
+</p>
+
+<p>
+    <a href="/accounts/index.do?pageNum=1">
+        帐户
+    </a>
+</p>
+
+<p>
+    <a href="/msgTemplate/index.do?pageNum=1">
+        消息模板
+    </a>
+</p>
+
+<p>
+    <a href="/newsTemplate/index.do?pageNum=1">
+        图文模板
+    </a>
+</p>
+
+##<p>
+##    <a href="/newsArticleTemplate/index.do?pageNum=1">
+##        图文列表模板
+##    </a>
+##</p>
+<p>
+    <a href="/keyword/index.do?pageNum=1">
+        关键字列表
+    </a>
+</p>
+<p>
+    <a href="/tree/index.do">
+        菜单列表
+    </a>
+</p>
+<p>
+    <a href="/qrcode/index.do?pageNum=1">
+        二维码
+    </a>
+</p>
+<p>
+    <a href="/imageTemplate/index.do?pageNum=1">
+        图片模板
+    </a>
+</p>
+<p>
+    <a href="/couponActive/index.do?pageNum=1">
+        优惠券
+    </a>
+</p>
+##<p>
+##    <a href="/tree/index.do">
+##        菜单树
+##    </a>
+##</p>

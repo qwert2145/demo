@@ -1,0 +1,30 @@
+
+<div id="bg_repeat">
+    <div id="bg">
+        <div id="wrapper">
+            <div id="cont">
+                <div class="register_top">
+                    <p>
+                        <a href="#">
+                            <img src="$!imgModule.getTarget('/img/r_logo.jpg')" alt=""/>
+                        </a>
+                    </p>
+                </div>
+                <div class="register_text_bg">
+                    <table border="1">
+
+                        <tr>
+                            <td align="center">
+
+                                <h4>恭喜你，操作成功！</h4>
+
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
