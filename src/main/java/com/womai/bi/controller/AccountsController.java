@@ -27,7 +27,7 @@ public class AccountsController {
         return jsonStr;
     }
 
-    @RequestMapping(value = "/remove",method = RequestMethod.GET)
+    @RequestMapping(value = "/remove",method ={RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public String removeCache() {
         accountsService.deleteCache();

@@ -46,9 +46,11 @@ a{cursor:pointer; color:#333; text-decoration:none; font-size:14px;-webkit-tap-h
     background:#333;height:100%; background-image: linear-gradient(145deg, #1D1F20, #404348);
 }
 .menu-section {
-    margin: 25px 0;color: #fff;
+    margin: 25px 0;color: #9e9e9e;
 }
-
+.menu-section.on{
+    color:#fff;
+}
 .menu-section-title {
     text-transform: uppercase;
     font-weight:bold;
@@ -98,11 +100,12 @@ a{cursor:pointer; color:#333; text-decoration:none; font-size:14px;-webkit-tap-h
 }
 .panel>section{padding:0 5px;margin-top:20px;}
 .panel>section h3{font-weight:bold;}
-.panel>section img{width:100%;}
 .tb{border-collapse: collapse;
     border: none;width:100%;
 }
 .tb td{border:1px solid #333;}
-.panel>section>div{min-height:200px;}
-
-
+.panel .echart{min-height:200px;}
+.panel-tab a{display:block;float:left;width:1.55rem;height:0.5rem;line-height:0.5rem;text-align:center;}
+.panel-tab a.on{background:#ff8143;}
+.panel-tab-mid a{display:block;float:left;width:1.24rem;height:0.5rem;line-height:0.5rem;text-align:center;}
+.panel-tab-mid a.on{background:#ff8143;}

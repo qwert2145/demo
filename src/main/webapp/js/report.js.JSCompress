@@ -1,0 +1,9 @@
+﻿<jscompress public="http://www.jscompress.cn/" command="import-combineset">
+<combinefile path="report.js">
+<sourcefile path=".\zepto.js" />
+<sourcefile path=".\template.m.js" />
+<sourcefile path=".\echarts.common.m.js" />
+<sourcefile path=".\slideout.m.js" />
+<sourcefile path=".\base.js" />
+</combinefile>
+</jscompress>
