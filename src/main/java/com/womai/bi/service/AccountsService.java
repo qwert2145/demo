@@ -24,5 +24,8 @@ public class AccountsService{
     public void deleteCache() {
         accountsDao.removeCache();
     }
+    public Accounts getAccount(String accountName) {
+        return null;
+    }
 
 }

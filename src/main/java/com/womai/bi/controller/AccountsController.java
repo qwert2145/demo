@@ -33,4 +33,11 @@ public class AccountsController {
         accountsService.deleteCache();
         return "remove cache";
     }
+
+    @RequestMapping(value = "/login",method ={RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public String login(String name,String password) {
+
+        return "login success";
+    }
 }

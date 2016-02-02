@@ -46,14 +46,16 @@
 <main id="panel" class="panel">
     <header class="panel-header">
         <a>☰</a>
-        <h1 class="title">数据统计</h1>
+        <h1 class="title">总体概况</h1>
     </header>
     <section>
 
     </section>
 </main>
+
 <textarea id="t0" style="display:none;">
-<h3>总体概况 <span class="fr">对比：昨日  7日平均 自定义时段</span></h3>
+<div class="p-all">
+<h3><span class="fr">对比：<a>昨日</a>  <a>7日平均</a> <a>自定义时段</a></span></h3>
 <table class="tb mt20">
     <tr>
         <td></td><td>订单量</td><td>订单金额</td><td>订单均价</td>
@@ -77,7 +79,7 @@
     </tr>
 </table>
 
-<div class="panel-tab mt20">
+<div class="panel-tab mt30">
     <a class="on">订单量</a>
     <a>订单金额</a>
     <a>下单用户</a>
@@ -86,24 +88,27 @@
 </div>
 <div class="echart mt20">
 
+</div>
 </div>
 </textarea>
 <textarea id="t1" style="display:none;">
-    <h3>实时</h3>
+    <div class="p-real">
+    <div class="panel-tab mt30">
+        <a class="on">订单量</a>
+        <a>订单金额</a>
+        <a>下单用户</a>
+        <a>UV</a>
+        <div class="cl"></div>
+    </div>
+    <div class="echart mt20">
 
-<div class="panel-tab mt20">
-    <a class="on">订单量</a>
-    <a>订单金额</a>
-    <a>下单用户</a>
-    <a>UV</a>
-    <div class="cl"></div>
-</div>
-<div class="echart mt20">
-
-</div>
+    </div>
+    </div>
 </textarea>
+
 <textarea id="t2" style="display:none;">
-    <h3>区域</h3>
+<div class="p-area">
+    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
 <table class="tb mt20">
     <tr>
         <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
@@ -124,7 +129,7 @@
         <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
     </tr>
 </table>
-<div class="panel-tab-mid mt20">
+<div class="panel-tab panel-tab-mid mt30">
     <a class="on">全站</a>
     <a>华北</a>
     <a>华东</a>
@@ -132,7 +137,7 @@
     <a>华中</a>
     <div class="cl"></div>
 </div>
-<div class="panel-tab mt20">
+<div class="panel-tab mt20 tab">
     <a class="on">订单量</a>
     <a>订单金额</a>
     <a>下单用户</a>
@@ -141,108 +146,114 @@
 </div>
 <div class="echart mt20">
 
+</div>
 </div>
 </textarea>
 <textarea id="t3" style="display:none;">
-    <h3>客户端</h3>
-<table class="tb mt20">
-    <tr>
-        <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
-    </tr>
-    <tr>
-        <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-</table>
-<div class="panel-tab mt20">
-    <a class="on">订单量</a>
-    <a>订单金额</a>
-    <a>下单用户</a>
-    <a>UV</a>
-    <div class="cl"></div>
-</div>
-<div class="echart mt20">
+    <div class="p-client">
+    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
+    <table class="tb mt20">
+        <tr>
+            <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
+        </tr>
+        <tr>
+            <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+    </table>
+    <div class="panel-tab mt30">
+        <a class="on">订单量</a>
+        <a>订单金额</a>
+        <a>下单用户</a>
+        <a>UV</a>
+        <div class="cl"></div>
+    </div>
+    <div class="echart mt20">
 
-</div>
+    </div>
+    </div>
 </textarea>
 <textarea id="t4" style="display:none;">
-    <h3>订单类别</h3>
-<table class="tb mt20">
-    <tr>
-        <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
-    </tr>
-    <tr>
-        <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-</table>
-<div class="panel-tab-mid mt20">
-    <a class="on">全站</a>
-    <a>华北</a>
-    <a>华东</a>
-    <a>华南</a>
-    <a>华中</a>
-    <div class="cl"></div>
-</div>
-<div class="panel-tab mt20">
-    <a class="on">订单量</a>
-    <a>订单金额</a>
-    <a>下单用户</a>
-    <a>UV</a>
-    <div class="cl"></div>
-</div>
-<div class="echart mt20">
+    <div class="p-order">
+    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
+    <table class="tb mt20">
+        <tr>
+            <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
+        </tr>
+        <tr>
+            <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+    </table>
+    <div class="panel-tab tab1 mt30">
+        <a class="on">总体</a>
+        <a>我买卡</a>
+        <a>折扣券</a>
+        <a>普通</a>
+        <div class="cl"></div>
+    </div>
+    <div class="panel-tab mt20 tab2">
+        <a class="on">订单量</a>
+        <a>订单金额</a>
+        <a>下单用户</a>
+        <a>UV</a>
+        <div class="cl"></div>
+    </div>
+    <div class="echart mt20">
 
-</div>
+    </div>
+    </div>
 </textarea>
 <textarea id="t5" style="display:none;">
-    <h3>新老会员</h3>
-<table class="tb mt20">
-    <tr>
-        <td></td><td>总体</td><td>新会员</td><td>老会员</td>
-    </tr>
-    <tr>
-        <td>下单用户</td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单数量</td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单金额</td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货单数</td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货金额</td><td></td><td></td><td></td>
-    </tr>
-</table>
-<div class="echart mt20">
+    <div class="p-user">
+    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
+    <table class="tb mt20">
+        <tr>
+            <td></td><td>总体</td><td>新会员</td><td>老会员</td>
+        </tr>
+        <tr>
+            <td>下单用户</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>订单数量</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>订单金额</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>发货单数</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>发货金额</td><td></td><td></td><td></td>
+        </tr>
+    </table>
+    <div class="echart mt20">
 
-</div>
+    </div>
+    </div>
 </textarea>
-<script type="text/javascript" src="js/report.min.js"></script>
+<script type="text/javascript" src="js/report.js"></script>
 </body>
 </html>
