@@ -1,6 +1,6 @@
 package com.womai.bi;
 
-import com.womai.bi.dao.AccountsDao;
+import com.womai.bi.dao.UserDao;
 import com.womai.bi.model.Accounts;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AccountsTest extends GeneralSpringTest {
 
     @Autowired
-    private AccountsDao accountsDao;
+    private UserDao userDao;
 
     @Test
     public void selectByIdTest() {
-        Accounts accounts = accountsDao.getAccount(66);
+        Accounts accounts = userDao.getAccount(66);
         System.out.println(accounts.getAccountName() + " =================");
     }
 

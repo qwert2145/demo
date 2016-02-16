@@ -2583,12 +2583,15 @@ var s=e[ai]("iconStyle"),l=a.getIcons?a.getIcons():e.get("icon"),u=e.get("title"
         'side': 'left',
         'padding':120
     });
-
+    //slideout.on('translate', function(translated) {
+    //    console.log(translated); // 120 in px
+    //    $('.panel').css("left",translated);
+    //});
     document.querySelector('.panel-header a').addEventListener('click', function() {
         slideout.toggle();
     });
 
-    $(".panel section").css({'min-height':window.screen.height || window.innerHeight});
+    $(".panel section").css({'min-height': window.innerHeight || window.screen.height  });
 
     //初始化   总体概览
     $(function(){

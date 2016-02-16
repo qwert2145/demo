@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-    <title>登陆</title>
+    <title>登陆login1</title>
     <meta charset="utf-8">
     <meta name="author" content="m.womai.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -8,21 +8,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="css/s-base.css" />
-    <script type="text/javascript" src="js/rem.min.js" dpr="1"></script>
+    <link rel="stylesheet" href="../../css/s-base.css" />
+    <script type="text/javascript" src="../../js/rem.min.js" dpr="1"></script>
 </head>
 <body class="login">
     <header>
-        <img src="images/login_03.png" class="mt30">
+        <img src="../../images/login_03.png" class="mt30">
     </header>
     <div>
-        <input placeholder="请输入用户名">
-        <input type="password" class="mt20" placeholder="请输入密码">
-        <a class="bt mt20" href="index.html">登陆</a>
+        <form action="/j_spring_security_check" method="post">
+            <input placeholder="请输入用户名" name="userName">
+            <input type="password" class="mt20" placeholder="请输入密码" name="passWord">
+            <input type="submit">
+        </form>
     </div>
 
     <footer>
-        <img src="images/login_07.png">
+        <img src="../../images/login_07.png">
     </footer>
 </body>
 </html>

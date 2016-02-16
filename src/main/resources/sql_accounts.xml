@@ -17,4 +17,14 @@
 			</value>
 		</constructor-arg>
 	</bean>
+
+	<bean id="sqlUser_checkUser" class="java.lang.String">
+		<constructor-arg>
+			<value>
+				<![CDATA[
+			select count(0) from users where username = :username and password = :password
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
 </beans>
