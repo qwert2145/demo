@@ -47,7 +47,7 @@ public class UserService {
 
     @Transactional
     public long createUser(User user,String authority) {
-        int count = userDao.checkUser(user.getUsername(), user.getPassword());
+        int count = userDao.checkUser(user.getUsername());
         //count > 0 用户已存在
         if(count > 0){
             return 0;
@@ -65,6 +65,12 @@ public class UserService {
         authorities.setUsername(user.getUsername());
         authorities.setAuthority(authority);
         userDao.createAuthorities(authorities);
+        if("admin".equals(authority)){
+            Authorities authorities1 = new Authorities();
+            authorities1.setUsername(user.getUsername());
+            authorities1.setAuthority("user");
+            userDao.createAuthorities(authorities1);
+        }
         return id;
     }
 }

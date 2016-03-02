@@ -52,10 +52,9 @@ public class UserDao {
 				"password") > 0;
 	}
 
-	public int checkUser(String username, String password) {
+	public int checkUser(String username) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("username", username);
-		paramMap.put("password", password);
 		return simpleDao.getNamedParameterJdbcTemplate().queryForObject(
 				sqlUser_checkUser, paramMap, Integer.class);
 	}

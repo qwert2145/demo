@@ -1,7 +1,8 @@
 <!doctype html>
 <head>
-    <title>demo</title>
-    <meta charset="utf-8">
+    <title>数据统计</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="images/favicon.ico" rel="shortcut icon">
     <meta name="author" content="m.womai.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta content="telephone=no" name="format-detection" />
@@ -12,7 +13,6 @@
     <script type="text/javascript" src="js/rem.min.js" dpr="1"></script>
 </head>
 <body>
-
 <nav id="menu" class="menu">
     <section class="menu-section on">
         <h3 class="menu-section-title">概况</h3>
@@ -41,222 +41,345 @@
     <section class="menu-section">
         <h3 class="menu-section-title">新老会员</h3>
     </section>
+    <section class="menu-section" controller="reg">
+        <h3 class="menu-section-title">创建用户</h3>
+    </section>
+    <section class="menu-section" controller="updatePwd">
+        <h3 class="menu-section-title">修改密码</h3>
+    </section>
+    <section class="menu-section">
+        <h3 class="menu-section-title" onclick="window.location='j_spring_security_logout';">退出登录</h3>
+    </section>
 </nav>
 
 <main id="panel" class="panel">
     <header class="panel-header border">
-        <a>☰</a>
+        <a></a>
         <h1 class="title">总体概况</h1>
     </header>
-    <section>
+    <section class="mt20">
 
     </section>
 </main>
 
+
 <textarea id="t0" style="display:none;">
 <div class="p-all">
-<h3><span class="fr">对比：<a>昨日</a>  <a>7日平均</a> <a>自定义时段</a></span></h3>
-<table class="tb mt20">
-    <tr>
-        <td></td><td>订单量</td><td>订单金额</td><td>订单均价</td>
-    </tr>
-    <tr>
-        <td>当前</td><td>30000</td><td>400000000000</td><td>1333.3</td>
-    </tr>
-    <tr>
-        <td>对比幅度</td><td><img src="images/down.png">1%</td><td>16%</td><td><img src="images/up.png">22%</td>
-    </tr>
-</table>
-<table class="tb mt20">
-    <tr>
-        <td></td><td>UV</td><td>转化率</td><td>下单用户</td>
-    </tr>
-    <tr>
-        <td>当前</td><td>30000</td><td>400000000000</td><td>1333.3</td>
-    </tr>
-    <tr>
-        <td>对比幅度</td><td><img src="images/down.png">1%</td><td>16%</td><td><img src="images/up.png">22%</td>
-    </tr>
-</table>
-<div class="border mt30"></div>
-<div class="panel-tab mt30">
-    <a class="on">订单量</a>
-    <a>订单金额</a>
-    <a>下单用户</a>
-    <a>UV</a>
-    <div class="cl"></div>
-</div>
-<div class="echart mt20">
+    <dl class="box border">
+        <dt>基本概况</dt>
+        <dd>
+            <h3><span class="fr">对比：<a k="beforeYesterday" class="on">前日</a>  <a k="weekly" class="">周均值</a> <a k="monthly" class="">月均值</a></span></h3>
+        </dd>
+    </dl>
 
-</div>
+    <dl class="box border mt20">
+        <dt>最近两周订单趋势</dt>
+        <dd>
+            <div class="panel-tab">
+                <a class="on" k="ordercnt">订单量</a>
+                <a k="orderprice">订单金额</a>
+                <a k="usercnt">下单用户</a>
+                <a k="UV">UV</a>
+                <div class="cl"></div>
+            </div>
+            {{include 'echart'}}
+        </dd>
+    </dl>
 </div>
 </textarea>
-<textarea id="t1" style="display:none;">
-    <div class="p-real">
-    <div class="panel-tab mt30">
-        <a class="on">订单量</a>
-        <a>订单金额</a>
-        <a>下单用户</a>
-        <a>UV</a>
-        <div class="cl"></div>
-    </div>
+<textarea id='t0_tb' style="display:none;">
+    <table class="tb">
+        <tr>
+            <td></td><td>订单量</td><td>订单金额</td><td>订单均价</td>
+        </tr>
+        <tr>
+            <td>昨日</td><td>{{yesterday.ordercnt | numFormat}}</td><td>{{yesterday.orderprice | numFormat}}</td><td>{{yesterday.kedanjia}}</td>
+        </tr>
+        <tr>
+            <td>对比幅度</td><td><img src="images/{{(yesterday.ordercntBi)<0?'down':'up'}}.png">{{yesterday.ordercntBi | numFormat}}%</td><td><img src="images/{{(yesterday.orderPriceBi)<0?'down':'up'}}.png">{{yesterday.orderPriceBi | numFormat}}%</td><td><img src="images/{{(yesterday.kedanjiaBi)<0?'down':'up'}}.png">{{yesterday.kedanjiaBi | numFormat}}%</td>
+        </tr>
+    </table>
+<table class="tb mt20">
+    <tr>
+        <td></td><td>UV</td><td>下单用户</td><td>转化率</td>
+    </tr>
+    <tr>
+        <td>昨日</td><td>{{yesterday.uv | numFormat}}</td><td>{{yesterday.usercnt | numFormat}}</td><td>{{yesterday.conversion | numFormat}}</td>
+    </tr>
+    <tr>
+        <td>对比幅度</td><td><img src="images/{{(yesterday.uvBi)<0?'down':'up'}}.png">{{yesterday.uvBi | numFormat}}%</td><td><img src="images/{{(yesterday.usercntBi)<0?'down':'up'}}.png">{{yesterday.usercntBi | numFormat}}%</td><td><img src="images/{{(yesterday.conversionBi)<0?'down':'up'}}.png">{{yesterday.conversionBi | numFormat}}%</td>
+    </tr>
+</table>
+</textarea>
+<textarea id="echart" style="display:none;">
     <div class="echart mt20">
 
     </div>
+</textarea>
+
+<textarea id="t1" style="display:none;">
+    <div class="p-real">
+        <dl class="box border">
+            <dt>今日累计</dt>
+            <dd>
+                <table class="tb">
+                    <tr>
+                        <td></td><td>订单量</td><td>订单金额</td><td>下单用户</td><td>UV</td>
+                    </tr>
+                    <tr>
+                        <td>当天累计</td><td>{{ordercnt | numFormat}}</td><td>{{orderprice | numFormat}}</td><td>{{usercnt | numFormat}}</td><td>{{uv | numFormat}}</td>
+                    </tr>
+                </table>
+            </dd>
+        </dl>
+        <dl class="box border mt20">
+            <dt>今日实时数据</dt>
+            <dd>
+                <div class="panel-tab">
+                    <a class="on" k="ordercnt">订单量</a>
+                    <a k="orderprice">订单金额</a>
+                    <a k="usercnt">下单用户</a>
+                    <a k="UV">UV</a>
+                    <div class="cl"></div>
+                </div>
+                {{include 'echart'}}
+            </dd>
+        </dl>
+
     </div>
 </textarea>
 
 <textarea id="t2" style="display:none;">
 <div class="p-area">
-    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
-<table class="tb mt20">
-    <tr>
-        <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
-    </tr>
-    <tr>
-        <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-</table>
-    <div class="border mt30"></div>
-<div class="panel-tab panel-tab-mid mt30">
-    <a class="on">全站</a>
-    <a>华北</a>
-    <a>华东</a>
-    <a>华南</a>
-    <a>华中</a>
-    <div class="cl"></div>
-</div>
-<div class="panel-tab mt20 tab">
-    <a class="on">订单量</a>
-    <a>订单金额</a>
-    <a>下单用户</a>
-    <a>UV</a>
-    <div class="cl"></div>
-</div>
-<div class="echart mt20">
-
-</div>
+    <dl class="box border">
+        <dt>各区概要</dt>
+        <dd>
+            <h3><span class="fr p-date"><input type="date" id="start" value="2016-01-01">-<input type="date" id="end" value="2016-01-01"></span></h3>
+        </dd>
+    </dl>
+    <dl class="box border mt20">
+        <dt>各区趋势</dt>
+        <dd>
+            <div class="panel-tab panel-tab-mid">
+                <a class="on" k="-1">全站</a>
+                <a k="0">华北</a>
+                <a k="100">华东</a>
+                <a k="200">华南</a>
+                <a k="500">华中</a>
+                <div class="cl"></div>
+            </div>
+            <div class="panel-tab mt20 tab">
+                <a class="on" k="ordercnt">订单量</a>
+                <a k="orderprice">订单金额</a>
+                <a k="usercnt">下单用户</a>
+                <!--<a>UV</a>-->
+                <div class="cl"></div>
+            </div>
+            {{include 'echart'}}
+        </dd>
+    </dl>
 </div>
 </textarea>
-<textarea id="t3" style="display:none;">
-    <div class="p-client">
-    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
+<textarea id="t2-tb" style="display:none;">
     <table class="tb mt20">
         <tr>
             <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
         </tr>
         <tr>
-            <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
+            <td>下单用户</td><td>{{all.usercnt | numFormat}}</td><td>{{huabei.usercnt | numFormat}}</td><td>{{huadong.usercnt | numFormat}}</td><td>{{huanan.usercnt | numFormat}}</td><td>{{huazhong.usercnt | numFormat}}</td>
         </tr>
         <tr>
-            <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
+            <td>订单数量</td><td>{{all.ordercnt | numFormat}}</td><td>{{huabei.ordercnt | numFormat}}</td><td>{{huadong.ordercnt | numFormat}}</td><td>{{huanan.ordercnt | numFormat}}</td><td>{{huazhong.ordercnt | numFormat}}</td>
         </tr>
         <tr>
-            <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
+            <td>订单金额</td><td>{{all.orderprice | numFormat}}</td><td>{{huabei.orderprice | numFormat}}</td><td>{{huadong.orderprice | numFormat}}</td><td>{{huanan.orderprice | numFormat}}</td><td>{{huazhong.orderprice | numFormat}}</td>
         </tr>
         <tr>
-            <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
+            <td>出库单数</td><td>{{all.chukuordercnt | numFormat}}</td><td>{{huabei.chukuordercnt | numFormat}}</td><td>{{huadong.chukuordercnt | numFormat}}</td><td>{{huanan.chukuordercnt | numFormat}}</td><td>{{huazhong.chukuordercnt | numFormat}}</td>
         </tr>
         <tr>
-            <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
+            <td>出库金额</td><td>{{all.chukuorderprice | numFormat}}</td><td>{{huabei.chukuorderprice | numFormat}}</td><td>{{huadong.chukuorderprice | numFormat}}</td><td>{{huanan.chukuorderprice | numFormat}}</td><td>{{huazhong.chukuorderprice | numFormat}}</td>
         </tr>
     </table>
-        <div class="border mt30"></div>
-    <div class="panel-tab mt30">
-        <a class="on">订单量</a>
-        <a>订单金额</a>
-        <a>下单用户</a>
-        <a>UV</a>
-        <div class="cl"></div>
-    </div>
-    <div class="echart mt20">
-
-    </div>
-    </div>
 </textarea>
+
+<!--客户端-->
+<textarea id="t3" style="display:none;">
+<div class="p-client">
+    <dl class="box border mt20">
+        <dt>客户端概要</dt>
+        <dd>
+            <h3><span class="fr p-date"><input type="date" id="start" value="2016-01-01">-<input type="date" id="end" value="2016-01-01"></span></h3>
+        </dd>
+    </dl>
+    <dl class="box border mt20">
+        <dt>客户端趋势</dt>
+        <dd>
+            <div class="panel-tab tab">
+                <a class="on" k="ordercnt">订单量</a>
+                <a k="orderprice">订单金额</a>
+                <a k="usercnt">下单用户</a>
+                <a k="UV">UV</a>
+                <div class="cl"></div>
+            </div>
+            {{include 'echart'}}
+        </dd>
+    </dl>
+
+</div>
+</textarea>
+<textarea id="t3-tb" style="display:none;">
+        <table class="tb mt20">
+            <tr>
+                <td></td><td>总体</td><td>pc</td><td>移动</td>
+            </tr>
+            <tr>
+                <td>下单用户</td><td>{{all.usercnt | numFormat}}</td><td>{{pc.usercnt | numFormat}}</td><td>{{mobile.usercnt | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>订单数量</td><td>{{all.ordercnt | numFormat}}</td><td>{{pc.ordercnt | numFormat}}</td><td>{{mobile.ordercnt | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>订单金额</td><td>{{all.orderprice | numFormat}}</td><td>{{pc.orderprice | numFormat}}</td><td>{{mobile.orderprice | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>出库单数</td><td>{{all.chukuordercnt | numFormat}}</td><td>{{pc.chukuordercnt | numFormat}}</td><td>{{mobile.chukuordercnt | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>出库金额</td><td>{{all.chukuorderprice | numFormat}}</td><td>{{pc.chukuorderprice | numFormat}}</td><td>{{mobile.chukuorderprice | numFormat}}</td>
+            </tr>
+        </table>
+</textarea>
+
+
 <textarea id="t4" style="display:none;">
     <div class="p-order">
-    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
-    <table class="tb mt20">
-        <tr>
-            <td></td><td>总体</td><td>华北</td><td>华东</td><td>华南</td><td>华中</td>
-        </tr>
-        <tr>
-            <td>下单用户</td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>订单数量</td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>订单金额</td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>发货单数</td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>发货金额</td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-    </table>
-        <div class="border mt30"></div>
-    <div class="panel-tab tab1 mt30">
-        <a class="on">总体</a>
-        <a>我买卡</a>
-        <a>折扣券</a>
-        <a>普通</a>
-        <div class="cl"></div>
+        <dl class="box border">
+            <dt>订单概要</dt>
+            <dd>
+                <h3><span class="fr p-date">
+                    <input type="date" id="start" value="2016-01-01">
+                    -<input type="date" id="end" value="2016-01-01"></span>
+                </h3>
+            </dd>
+        </dl>
+        <dl class="box border mt20">
+            <dt>订单趋势</dt>
+            <dd>
+                <h4 class="color1">注：我买卡和折扣券可同时使用，存在重复统计</h4>
+                <div class="panel-tab tab1 mt30">
+                    <a class="on" k="all">总体</a>
+                    <a k="womaicard">我买卡</a>
+                    <a k="groupon">折扣券</a>
+                    <a k="normal">普通</a>
+                    <div class="cl"></div>
+                </div>
+                <div class="panel-tab mt20 tab2">
+                    <a class="on" k="ordercnt">订单量</a>
+                    <a k="orderprice">订单金额</a>
+                    <a k="usercnt">下单用户</a>
+                    <!--<a>UV</a>-->
+                    <div class="cl"></div>
+                </div>
+                {{include 'echart'}}
+            </dd>
+        </dl>
     </div>
-    <div class="panel-tab mt20 tab2">
-        <a class="on">订单量</a>
-        <a>订单金额</a>
-        <a>下单用户</a>
-        <a>UV</a>
-        <div class="cl"></div>
-    </div>
-    <div class="echart mt20">
-
-    </div>
-    </div>
+</textarea>
+<textarea id="t4-tb" style="display:none;">
+        <table class="tb mt20">
+            <tr>
+                <td></td><td>总体</td><td>我买卡</td><td>折扣券</td><td>普通</td>
+            </tr>
+            {{each data as el i}}
+            <tr>
+                <td>{{el.dataitem}}</td><td>{{el.alldata | numFormat}}</td><td>{{el.womaicard_data | numFormat}}</td><td>{{el.discount_data | numFormat}}</td><td>{{el.normal_data | numFormat}}</td>
+            </tr>
+            {{/each}}
+        </table>
 </textarea>
 <textarea id="t5" style="display:none;">
     <div class="p-user">
-    <h3><span class="fr p-date"><input type="date" value="2016-01-01">-<input type="date" value="2016-01-01"></span></h3>
-    <table class="tb mt20">
-        <tr>
-            <td></td><td>总体</td><td>新会员</td><td>老会员</td>
-        </tr>
-        <tr>
-            <td>下单用户</td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>订单数量</td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>订单金额</td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>发货单数</td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>发货金额</td><td></td><td></td><td></td>
-        </tr>
-    </table>
-    <div class="echart mt20">
-
-    </div>
+        <dl class="box border">
+            <dt>会员概要</dt>
+            <dd>
+                <h3><span class="fr p-date"><input type="date" id="start" value="2016-01-01">-<input type="date" id="end" value="2016-01-01"></span></h3>
+            </dd>
+        </dl>
+        <dl class="box border mt20">
+            <dt>新老会员趋势</dt>
+            <dd>
+                <div class="panel-tab tab2">
+                    <a class="on" k="ordercnt">订单量</a>
+                    <a k="orderprice">订单金额</a>
+                    <a k="usercnt">下单用户</a>
+                    <!--<a>UV</a>-->
+                    <div class="cl"></div>
+                </div>
+                {{include 'echart'}}
+                <h5 class="color1">注释：此处说明每天新老客不等于整段时间的会员数</h5>
+            </dd>
+        </dl>
     </div>
 </textarea>
-<script type="text/javascript" src="js/report.min.js"></script>
+<textarea id="t5-tb" style="display:none;">
+        <table class="tb mt20">
+            <tr>
+                <td></td><td>总体</td><td>新会员</td><td>老会员</td>
+            </tr>
+            <tr>
+                <td>会员数</td><td>{{all.usercnt | numFormat}}</td><td>{{newUser.usercnt | numFormat}}</td><td>{{oldUser.usercnt | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>订单数量</td><td>{{all.ordercnt | numFormat}}</td><td>{{newUser.ordercnt | numFormat}}</td><td>{{oldUser.ordercnt | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>订单金额</td><td>{{all.orderprice | numFormat}}</td><td>{{newUser.orderprice | numFormat}}</td><td>{{oldUser.orderprice | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>发货单数</td><td>{{all.chukuordercnt | numFormat}}</td><td>{{newUser.chukuordercnt | numFormat}}</td><td>{{oldUser.chukuordercnt | numFormat}}</td>
+            </tr>
+            <tr>
+                <td>发货金额</td><td>{{all.chukuorderprice | numFormat}}</td><td>{{newUser.chukuorderprice | numFormat}}</td><td>{{oldUser.chukuorderprice | numFormat}}</td>
+            </tr>
+        </table>
+</textarea>
+<textarea id="reg" style="display:none;">
+    <div class="p-reg">
+        <form id="reg">
+        <input placeholder="请输入用户名" name="username">
+        <label class="for-username color1"></label>
+        <input type="password" class="mt20" placeholder="请输入密码" name="pwd">
+        <label class="for-pwd color1"></label>
+        <input type="password" class="mt20" placeholder="请确认密码" name="pwd2">
+        <label class="for-pwd2 color1"></label>
+
+        <label class="for-result color1"></label>
+        <a class="bt mt20">创建</a>
+        </form>
+    </div>
+
+
+</textarea>
+<textarea id="updatePwd" style="display:none;">
+
+    <div class="p-reg">
+        <form id="upd">
+        <input placeholder="请输入用户名" name="username">
+        <label class="for-username color1"></label>
+        <input type="password" class="mt20" placeholder="请输入密码" name="pwd">
+        <label class="for-pwd color1"></label>
+        <input type="password" class="mt20" placeholder="请确认密码" name="pwd2">
+        <label class="for-pwd2 color1"></label>
+
+        <label class="for-result color1"></label>
+        <a class="bt mt20">修改</a>
+        </form>
+    </div>
+
+</textarea>
+<script type="text/javascript" src="js/echarts.common.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/report.min.js" charset="utf-8"></script>
 </body>
+
 </html>

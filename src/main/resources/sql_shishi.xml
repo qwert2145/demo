@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-autowire="byName">
+
+	<bean id="sql_sumToday" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			select SUM(uv) as uv,SUM(usercnt) as usercnt,SUM(ordercnt) as ordercnt,SUM(orderprice) as orderprice from t_shishi_all
+			where flag = 'today' and hours in (:hours)
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getEveryHourToday" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			select * from t_shishi_all
+			where flag = 'today' and hours in (:hours)
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getAverageOfSevenDays" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT SUM(usercnt) as usercnt,SUM(ordercnt) as ordercnt,SUM(orderprice) as orderprice,sum(uv) as uv,hours from t_shishi_all where hours in (:hours) GROUP BY hours
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getAverageOfSixDays" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			select * from t_shishi_all
+			where hours in (:hours) and flag = '6days'
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+</beans>

@@ -23,10 +23,6 @@ public class MD5Util {
         } catch (Exception e) {
             return null;
         }
-
     }
 
-    public static void main(String[] args) {
-        System.out.println(MD5("user"));
-    }
 }

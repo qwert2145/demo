@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-autowire="byName">
+
+	<bean id="sql_getGaiKuang" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT * from t_gaikuang_table where flag = :flag
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+	<bean id="sql_getBeforeYesterday" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			select * from t_daily_info where riqi = :riqi
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getLastTwoWeek" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT * from t_daily_info where riqi BETWEEN :begin and :end ORDER BY riqi
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+</beans>

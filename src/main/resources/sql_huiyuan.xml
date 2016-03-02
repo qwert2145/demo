@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-autowire="byName">
+
+	<!--总体   会员数 订单数量 订单金额 -->
+	<bean id="sql_getAllUser" class="java.lang.String">
+		<constructor-arg>
+			<value>
+				<![CDATA[
+			SELECT count(DISTINCT userid) as usercnt,COUNT(orderid) as ordercnt,SUM(orderprice) as orderprice from t_order
+			where createtime BETWEEN :begin and :end;
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getAllUserForChuku" class="java.lang.String">
+		<constructor-arg>
+			<value>
+				<![CDATA[
+			SELECT COUNT(orderid) as chukuordercnt,SUM(orderprice) as chukuorderprice from t_order
+			where createtime BETWEEN :begin and :end and orderstatus = '已出库';
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<!--新会员   会员数 订单数量 订单金额 -->
+	<bean id="sql_getNewUser" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT count(DISTINCT userid) as usercnt,COUNT(orderid) as ordercnt,SUM(orderprice) as orderprice from t_order
+			where first_order_createtime BETWEEN :begin and :end;
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getNewUserForChuku" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT COUNT(orderid) as chukuordercnt,SUM(orderprice) as chukuorderprice from t_order
+			where first_order_createtime BETWEEN :begin and :end and orderstatus = '已出库';
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<!--老会员   会员数 订单数量 订单金额 -->
+	<bean id="sql_getOldUser" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT count(DISTINCT userid) as usercnt,COUNT(orderid) as ordercnt,SUM(orderprice) as orderprice from t_order
+			where first_order_createtime not BETWEEN :begin and :end and createtime BETWEEN :begin and :end;
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getOldUserForChuku" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT COUNT(orderid) as chukuordercnt,SUM(orderprice) as chukuorderprice from t_order
+			where first_order_createtime not BETWEEN :begin and :end and createtime BETWEEN :begin and :end and orderstatus = '已出库';
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getHuiYuanChart" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT riqi, newusercnt,newuserordercnt,newuserorderprice, (usercnt - newusercnt) as oldusercnt,(ordercnt - newuserordercnt) as olduserordercnt,(orderprice -newuserorderprice) as olduserorderprice from t_daily_info
+			where riqi BETWEEN :begin and :end ORDER BY riqi;
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+</beans>

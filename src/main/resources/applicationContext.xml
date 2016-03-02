@@ -21,8 +21,13 @@
 	</bean>
 
 	<!-- 用于biDbHandler DAO中SQL语句的注入 -->
-	<import resource="classpath*:/sql_accounts.xml" />
-
+	<import resource="classpath*:/sql_user.xml" />
+	<import resource="classpath*:/sql_gaikuang.xml" />
+	<import resource="classpath*:/sql_shishi.xml" />
+	<import resource="classpath*:/sql_quyu.xml" />
+	<import resource="classpath*:/sql_platform.xml" />
+	<import resource="classpath*:/sql_ordertype.xml" />
+	<import resource="classpath*:/sql_huiyuan.xml" />
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 						  proxy-target-class="true" />

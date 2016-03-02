@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-autowire="byName">
+	<!--总体下单用户 订单数量 订单金额-->
+	<bean id="sql_getAll" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT count(DISTINCT userid) as usercnt, COUNT(orderid) as ordercnt,SUM(orderprice) as orderprice from t_order
+			where createtime BETWEEN :begin and :end
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+	<!--总体出库单数 出库金额-->
+	<bean id="sql_getAllForChuKu" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT COUNT(orderid) as chukuordercnt,SUM(orderprice) as chukuorderprice from t_order
+			where createtime BETWEEN :begin and :end and orderstatus = '已出库'
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+	<!--下单用户 订单数量 订单金额-->
+	<bean id="sql_getRegion" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT count(DISTINCT userid) as usercnt, COUNT(orderid) as ordercnt,SUM(orderprice) as orderprice from t_order
+			where createtime BETWEEN :begin and :end and region = :region
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+	<!--出库单数 出库金额-->
+	<bean id="sql_getRegionForChuKu" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT COUNT(orderid) as chukuordercnt,SUM(orderprice) as chukuorderprice from t_order
+			where createtime BETWEEN :begin and :end and region = :region and orderstatus = '已出库'
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sql_getQuYuChart" class="java.lang.String">
+		<constructor-arg>
+			<value>
+			<![CDATA[
+			SELECT * from t_quyu_chart where region = :region and riqi BETWEEN :begin and :end order by riqi
+			]]>
+			</value>
+		</constructor-arg>
+	</bean>
+</beans>

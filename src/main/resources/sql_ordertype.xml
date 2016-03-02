@@ -7,22 +7,23 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
 	default-autowire="byName">
-	
-	<bean id="sqlAccounts_getAccountsBy" class="java.lang.String">
+	<!--总体 订单数量 订单金额-->
+	<bean id="sql_getTypeTable" class="java.lang.String">
 		<constructor-arg>
 			<value>
 			<![CDATA[
-			select * from accounts where id = :id
+			SELECT SUM(alldata) as alldata,SUM(womaicard_data) as womaicard_data,SUM(discount_data) as discount_data,SUM(normal_data) as normal_data,dataitem from t_ordertype_table
+            where riqi BETWEEN :begin and :end GROUP BY dataitem;
 			]]>
 			</value>
 		</constructor-arg>
 	</bean>
 
-	<bean id="sqlUser_checkUser" class="java.lang.String">
+	<bean id="sql_getTypeChart" class="java.lang.String">
 		<constructor-arg>
 			<value>
-				<![CDATA[
-			select count(0) from users where username = :username and password = :password
+			<![CDATA[
+			SELECT * from t_ordertype_chart where riqi BETWEEN :begin and :end and flag = :flag order by riqi
 			]]>
 			</value>
 		</constructor-arg>

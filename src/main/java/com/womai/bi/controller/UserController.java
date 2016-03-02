@@ -8,6 +8,9 @@ import com.womai.bi.util.MD5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,14 +46,14 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("login1");
+        model.setViewName("login");
         return model;
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("index");
+        model.setViewName("logout");
         return model;
     }
 
@@ -70,17 +73,46 @@ public class UserController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     @ResponseBody
-    public void createUser(String userName,String passWord,String authority) {
+    public String createUser(String userName,String passWord,String authority) {
         User user = new User();
         user.setUsername(userName);
         user.setPassword(MD5Util.MD5(passWord));
         user.setEnabled(true);
-        userService.createUser(user, authority);
+        long result = userService.createUser(user, authority);
+        //用户已存在
+        if(result == 0){
+            return "0";
+        }else{
+            return "1";
+        }
     }
 
     @RequestMapping(value = "/changePass", method = RequestMethod.GET)
     @ResponseBody
-    public void changePass(String userName,String passWord) {
-        userService.changePassword(userName, MD5Util.MD5(passWord));
+    public String changePass(String userName,String passWord) {
+        boolean result = userService.changePassword(userName, MD5Util.MD5(passWord));
+        if(result == true){
+            return "1";
+        }else {
+            return "0";
+        }
+    }
+
+    @RequestMapping(value = "/isAdmin", method = RequestMethod.GET)
+    @ResponseBody
+    public String isAdmin() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        Object[] sga =userDetails.getAuthorities().toArray();
+        String result = "0";
+        for(int i=0;i<sga.length;i++){
+            String role = ((SimpleGrantedAuthority)sga[0]).getAuthority();
+            if("admin".equals(role)) {
+                result = "1";
+                break;
+            }
+        }
+        return result;
     }
 }
